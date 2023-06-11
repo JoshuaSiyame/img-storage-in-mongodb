@@ -5,6 +5,7 @@ const dotenv = require("dotenv");
 const logger = require("morgan");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+const path = require("path");
 
 // import routes
 const appRoutes = require("./routes/routes");
@@ -34,6 +35,9 @@ if(process.env.MODE !=="production"){
 const app = express();
 
 // app configurations
+app.set("view engine", "ejs");
+app.set("views", path.resolve(__dirname, "views"));
+app.use("/public", express.static(path.resolve(__dirname, "public")));
 app.use(logger("dev"));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
