@@ -16,6 +16,11 @@ router.get("/test", (req, res)=>{
     res.status(200).send("Working");
 });
 
+router.get("/", (req, res)=>{
+    res.render("pages/index");
+});
+
+
 router.get("/upload", (req, res)=>{
     res.render("pages/upload");
 });

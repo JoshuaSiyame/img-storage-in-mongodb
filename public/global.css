@@ -1,0 +1,43 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "maven pro";
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+footer{
+    margin-top: auto;
+}
+
+a{
+    text-decoration: none;
+}
+
+li{
+    list-style: none;
+}
+
+.logo{
+    font-size: 26px;
+    font-weight: 500;
+    padding: 1em 0;
+}
+
+.main-nav{
+    display: flex;
+}
+
+.nav-item-link{
+    color: darkslategray;
+    padding: 1em;
+}
+
+.nav-item-link:hover{
+    color: slateblue;
+}
