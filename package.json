@@ -1,5 +1,5 @@
 {
-  "name": "media-storage-in-mongodb",
+  "name": "img-storage-in-mongodb",
   "version": "1.0.0",
   "description": "Simple app to store and preview images to and from mongodb.",
   "main": "server.js",
