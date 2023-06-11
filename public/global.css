@@ -68,3 +68,9 @@ li{
     padding: .5em 2em;
     width: 300px;
 }
+
+/* image */
+.image{
+    width: 300px;
+    object-fit: fill;
+}

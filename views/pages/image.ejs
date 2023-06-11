@@ -1,0 +1,15 @@
+<%- include("../utils/header.ejs") %>
+    <main>
+        <h2>Images.</h2>
+
+        <img src="data:/<%= image.mimeType %>;base64,<%= image.img.toString('base64') %>"
+            alt="<%= image.originalName %>" class="image">
+        <h4>
+            Name: <%= image.originalName %>
+        </h4>
+        <p>Desc: <%= image.description %></p>
+        <form method="post" action="/delete/image/<%= image._id %>?_method=DELETE">
+            <button style="color:red; padding:.5em 1em;">delete image</button>
+        </form>        
+    </main>
+    <%- include("../utils/footer.ejs") %>

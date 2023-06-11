@@ -21,7 +21,7 @@ router.get("/", async (req, res)=>{
         // get the images
         const imageFiles = await Image.find({});
         if(imageFiles.length === 0){
-            return res.status(200).send("No images yet");
+            return res.status(200).redirect("/upload");
         };
         res.render("pages/index", {imageFiles: imageFiles});
     } catch (error) {
@@ -29,6 +29,27 @@ router.get("/", async (req, res)=>{
         res.status(500).send("Something broke");
     };
 });
+
+router.get("/upload", (req, res)=>{
+    res.render("pages/upload");
+});
+
+router.get("/image/:imageId", async (req, res)=>{
+    try {
+        // get the requested id
+        const imageId = req.params.imageId;
+
+        // retrieve a single image based on the id
+        const image = await Image.findById(imageId);
+        if(!image){
+            return res.status(404).send("Image not found");
+        };
+        res.status(200).render("pages/image", {image});
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Something broke.");
+    };
+})
 
 router.post("/upload", upload.single("image"), async (req, res)=>{
     try {
@@ -56,6 +77,20 @@ router.post("/upload", upload.single("image"), async (req, res)=>{
     } catch (err) {
         console.log(err);
         return res.status(500).send("Something broke");
+    };
+});
+
+router.delete("/delete/image/:imageId", async (req, res)=>{
+    try{
+        // get image id
+        const imageId = req.params.imageId;
+
+        // find image and delete it
+        await Image.findByIdAndDelete(imageId);
+        res.status(200).redirect("/");
+    }catch(err){
+        console.error(err);
+        res.status(500).send("Something broke.");
     };
 });
 

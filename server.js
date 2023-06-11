@@ -6,6 +6,7 @@ const logger = require("morgan");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const path = require("path");
+const methodOverride = require("method-override");
 
 // import routes
 const appRoutes = require("./routes/routes");
@@ -41,6 +42,7 @@ app.use("/public", express.static(path.resolve(__dirname, "public")));
 app.use(logger("dev"));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(methodOverride("_method"));
 
 // routes configuration
 app.use("/", appRoutes);
