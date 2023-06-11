@@ -3,12 +3,20 @@ const mongoose = require("mongoose");
 
 // image schema
 const imageSchema = new mongoose.Schema({
-    name: {
+    originalName: {
         type: String,
         required: true
     },
     description: {
         type: String
+    },
+    mimeType: {
+        type: String, 
+        required: true
+    },
+    size: {
+        type: Number,
+        required: true
     },
     img: {
         type: Buffer,
