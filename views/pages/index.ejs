@@ -1,6 +1,9 @@
 <%- include("../utils/header.ejs") %>
 <main>
     <h2>Images.</h2>
-    <% imageFiles %>
+    <% imageFiles.forEach(image=>{%>
+        <img src="data:/<%= image.mimeType %>;base64,<%= image.img.toString('base64') %>" alt="<%= image.originalName %>" class="image">
+        <h4><%= image.originalName %></h4>
+    <% }) %>
 </main>
 <%- include("../utils/footer.ejs") %>

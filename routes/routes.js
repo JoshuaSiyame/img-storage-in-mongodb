@@ -16,19 +16,14 @@ router.get("/test", (req, res)=>{
     res.status(200).send("Working");
 });
 
-router.get("/", (req, res)=>{
-    res.render("pages/index");
-});
-
-
-router.get("/upload", async (req, res)=>{
+router.get("/", async (req, res)=>{
     try {
         // get the images
         const imageFiles = await Image.find({});
         if(imageFiles.length === 0){
             return res.status(200).send("No images yet");
         };
-        res.render("pages/upload", {imageFiles});
+        res.render("pages/index", {imageFiles: imageFiles});
     } catch (error) {
         console.error(err);
         res.status(500).send("Something broke");
