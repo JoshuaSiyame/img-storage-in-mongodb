@@ -28,12 +28,20 @@ router.get("/upload", (req, res)=>{
 router.post("/upload", upload.single("image"), async (req, res)=>{
     try {
         // get submitted data
-        const { name, description } = req.body;
+        const { description } = req.body;
 
         // file uploaded
         const file = req.file;
 
-        console.table([name, description, file]);
+        const fileData = {
+            originalName: file.originalname,
+            description: description,
+            mimeType: file.mimetype,
+            size: file.size,
+            img: file.buffer
+        }
+
+        console.log(fileData);
 
     } catch (err) {
         console.log(err);
