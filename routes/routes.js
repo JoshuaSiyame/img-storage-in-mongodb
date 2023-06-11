@@ -21,8 +21,18 @@ router.get("/", (req, res)=>{
 });
 
 
-router.get("/upload", (req, res)=>{
-    res.render("pages/upload");
+router.get("/upload", async (req, res)=>{
+    try {
+        // get the images
+        const imageFiles = await Image.find({});
+        if(imageFiles.length === 0){
+            return res.status(200).send("No images yet");
+        };
+        res.render("pages/upload", {imageFiles});
+    } catch (error) {
+        console.error(err);
+        res.status(500).send("Something broke");
+    };
 });
 
 router.post("/upload", upload.single("image"), async (req, res)=>{
@@ -39,9 +49,14 @@ router.post("/upload", upload.single("image"), async (req, res)=>{
             mimeType: file.mimetype,
             size: file.size,
             img: file.buffer
-        }
+        };
 
-        console.log(fileData);
+        // preview the data before submit
+        // console.log(fileData);
+
+        // save the data to database
+        await Image(fileData).save();
+        res.redirect("/");
 
     } catch (err) {
         console.log(err);
